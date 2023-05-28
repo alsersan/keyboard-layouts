@@ -16,19 +16,30 @@
 #include QMK_KEYBOARD_H
 
 #define _QWERTY 0
-#define _SYMB 1
+#define _SYM 1
 #define _NAV 2
 #define _ADJUST 3
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
-  SYMB,
+  SYM,
   NAV,
   ADJUST,
 };
 
-// Shortcut to make keymap more readable
-#define SYM_L   MO(_SYMB)
+// Aliases for readability
+#define CTL_P   LCTL(KC_P)
+#define CT_SFP  LCTL(LSFT(KC_P))
+#define SYM_QT  LT(_SYM, KC_QUOT)
+#define ALT_F2  LALT(KC_F2)
+#define CT_SLSH LCTL(KC_SLSH)
+
+#define CTL_S   LCTL(KC_S)
+#define CTL_GRV LCTL(KC_GRV)
+#define ALT_TAB LALT(KC_TAB)
+#define CT_SFA  LCTL(LSFT(KC_A))
+#define NAV_L   MO(_SYM)
+#define ADJ_L   MO(_SYM)
 
 #define KC_ALAS LALT_T(KC_PAST)
 #define KC_CTPL LCTL_T(KC_BSLS)
@@ -41,21 +52,36 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
+ /*
+  * Layer template
+  *
+  * ┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
+  * |  ` ~   |   1    |    2   |   3    |   4    |   5    |                                           |   6    |   7    |   8    |   9    |   10   | CapsLk | 
+  * ├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+  * |  Tab   |   Q    |    W   |   E    |   R    |   T    | Ctrl+/ |                         |Ct+Sf+A |   Y    |   U    |   I    |   O    |   P    |  - _   |
+  * ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+  * |  Esc   |   A    |    S   |   D    |   F    |   G    |LAlt+F2 |                         |Alt+Tab |   H    |   J    |   K    |   L    |  ; :   |  = +   | 
+  * ├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+  * | LShift |   Z    |    X   |   C    |   V    |   B    | Ctl+P  |Ct+Sf+P |       | Ctrl+` | Ctrl+S |   N    |   M    |   , <  |  . >   |  / ?   | RShift |
+  * ├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
+  * |  Ctrl  |  LAlt  |  LGUI  |  RAlt  |    |SYM/' " |   |  Bksp  | Delete |       | Enter  | Space  |   | LShift |    |  F12   |  NAV_L |  ADJ_L |        |
+  * └────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
+  */ 
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     KC_NAGR ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                                            KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_NAMI ,
+     KC_GRV  ,KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                                            KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_CAPS ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB  ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,SYM_L   ,                          SYM_L   ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_EQL  ,
+     KC_TAB  ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,CT_SLSH ,                          CT_SFA  ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_MINS ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_ESC  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_LBRC ,                          KC_RBRC ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,KC_QUOT ,
+     KC_ESC  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,ALT_F2  ,                          ALT_TAB ,KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,KC_EQL  ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,KC_ADPU ,KC_PGDN ,        KC_HOME ,KC_ADEN ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT ,
+     KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,CTL_P   ,CT_SFP  ,        CTL_GRV ,CTL_S   ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     KC_LGUI ,KC_PPLS ,KC_PMNS ,KC_ALAS ,     KC_CTPL ,    KC_BSPC ,KC_DEL  ,        KC_ENT  ,KC_SPC  ,    KC_RALT ,     KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT 
+     KC_LCTL ,KC_LALT ,KC_LGUI ,KC_RALT ,     SYM_QT  ,    KC_BSPC ,KC_DEL  ,        KC_ENT  ,KC_SPC  ,    KC_LSFT ,     KC_F12  ,NAV_L   ,ADJ_L   ,XXXXXXX 
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 
-  [_SYMB] = LAYOUT(
+  [_SYM] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      _______ ,KC_F1   ,KC_F2   ,KC_F3   ,KC_F4   ,KC_F5   ,                                            KC_F6   ,KC_F7   ,KC_F8   ,KC_F9   ,KC_F10  ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
