@@ -43,7 +43,7 @@ enum custom_keycodes {
 
 #define CTL_Z   LCTL(KC_Z)
 #define CTL_Y   LCTL(KC_Y)
-#define CTL_P   LCTL(KC_P)
+#define CTL_F   LCTL(KC_F)
 #define CTL_X   LCTL(KC_X)
 #define CTL_C   LCTL(KC_C)
 #define CTL_V   LCTL(KC_V)
