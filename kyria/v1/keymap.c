@@ -45,6 +45,8 @@ enum layers {
 #define CT_SFC  LCTL(LSFT(KC_C))
 #define CT_SFV  LCTL(LSFT(KC_V))
 
+#define PRT_SC LGUI(LSFT(KC_S))
+
 #define NUMFUNC MO(_NUMFUNC)
 #define ADJUST   MO(_ADJUST)
 
