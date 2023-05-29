@@ -28,7 +28,7 @@ enum layers {
 
 // Aliases for readability
 #define SYM_QT  LT(_SYM, KC_QUOT)
-#define NAV_TAB LT(_NAV, KC_TAB)
+#define ADJ_TAB LT(_ADJUST, KC_TAB)
 #define CTL_P   LCTL(KC_P)
 #define CT_SFP  LCTL(LSFT(KC_P))
 #define CTL_S   LCTL(KC_S)
@@ -45,13 +45,11 @@ enum layers {
 #define CT_SFC  LCTL(LSFT(KC_C))
 #define CT_SFV  LCTL(LSFT(KC_V))
 
-#define NUMFUNC     MO(_NUMFUNC)
+#define NUMFUNC MO(_NUMFUNC)
+#define ADJUST   MO(_ADJUST)
 
 #define SYM      MO(_SYM)
 #define NAV      MO(_NAV)
-#define ADJUST   MO(_ADJUST)
-
-#define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
 #define CTL_MINS MT(MOD_RCTL, KC_MINUS)
 #define ALT_ENT  MT(MOD_LALT, KC_ENT)
 
@@ -59,35 +57,31 @@ enum layers {
 #define COLEMAK  DF(_COLEMAK_DH)
 #define DVORAK   DF(_DVORAK)
 
-// Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
-// The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
-// produces the key `tap` when tapped (i.e. pressed and released).
-
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  /*
   * Base Layer: QWERTY
   *                                                                                     
   * ┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-  * |NAV/Tab |   Q    |   W    |   E    |   R    |   T    |                                           |   Y    |   U    |   I    |   O    |   P    | CapsLk |
+  * |ADJ/Tab |   Q    |   W    |   E    |   R    |   T    |                                           |   Y    |   U    |   I    |   O    |   P    | CapsLk |
   * ├────────┼────────┼────────┼────────┼────────┼────────┤                                           ├────────┼────────┼────────┼────────┼────────┼────────┤
   * |Ctrl/Esc|   A    |   S    |   D    |   F    |   G    |                                           |   H    |   J    |   K    |   L    |  ; :   |  LAlt  | 
   * ├────────┼────────┼────────┼────────┼────────┼────────┼────────┬────────┐       ┌────────┬────────┼────────┼────────┼────────┼────────┼────────┼────────┤
   * | LShift |   Z    |   X    |   C    |   V    |   B    | Ctl+P  |Ct+Sf+P |       | Ctrl+` | Ctrl+S |   N    |   M    |   , <  |  . >   |  / ?   | RShift |
   * └────────┴────────┴────────┼────────┼────────┼────────┼────────┼────────┤       ├────────┼────────┼────────┼────────┼────────┼────────┴────────┴────────┘
-  *                            |  LGUI  |  RAlt  |SYM/' " |  Bksp  | Delete |       | Enter  | Space  |NUMFUNC |  F12   |        |                           
+  *                            |  LGUI  |  RAlt  |SYM/' " |  Bksp  | Delete |       | Enter  | Space  |NUMFUNC |  F12   | ADJUST |                           
   *                            |        |        |        |        |        |       |        |        |        |        |        |
   *                            └────────┴────────┴────────┴────────┴────────┘       └────────┴────────┴────────┴────────┴────────┘
   */  
   [_QWERTY] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
-     NAV_TAB ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,                                            KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_CAPS ,
+     ADJ_TAB ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,                                            KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_CAPS ,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                                           ├────────┼────────┼────────┼────────┼────────┼────────┤
      CTL_ESC ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,                                            KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,KC_LALT , 
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┬────────┐       ┌────────┬────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT ,KC_Z    ,KC_X    ,KC_C    ,KC_V    ,KC_B    ,CTL_P   ,CT_SFP  ,        CTL_GRV ,CTL_S   ,KC_N    ,KC_M    ,KC_COMM ,KC_DOT  ,KC_SLSH ,KC_RSFT ,
   //└────────┴────────┴────────┼────────┼────────┼────────┼────────┼────────┤       ├────────┼────────┼────────┼────────┼────────┼────────┴────────┴────────┘
-                                KC_LGUI ,KC_RALT ,SYM_QT  ,KC_BSPC ,KC_DEL  ,        KC_ENT  ,KC_SPC  ,NUMFUNC ,KC_F12  ,XXXXXXX                            
+                                KC_LGUI ,KC_RALT ,SYM_QT  ,KC_BSPC ,KC_DEL  ,        KC_ENT  ,KC_SPC  ,NUMFUNC ,KC_F12  ,ADJUST                            
   //                           |        |        |        |        |        |       |        |        |        |        |        |
   //                           └────────┴────────┴────────┴────────┴────────┘       └────────┴────────┴────────┴────────┴────────┘
   ),
@@ -208,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   *                            |        |        |        |        |        |       |        |        |        |        |        |
   *                            └────────┴────────┴────────┴────────┴────────┘       └────────┴────────┴────────┴────────┴────────┘
   */  
-  [_LAYERINDEX] = LAYOUT(
+  [_NUMFUNC] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,                                            XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                                           ├────────┼────────┼────────┼────────┼────────┼────────┤
@@ -221,26 +215,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //                           └────────┴────────┴────────┴────────┴────────┘       └────────┴────────┴────────┴────────┴────────┘
   ),
 
-/*
- * Adjust Layer: Default layer settings, RGB
- *
- * ,-------------------------------------------.                              ,-------------------------------------------.
- * |        |      |      |QWERTY|      |      |                              |      |      |      |      |      |        |
- * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
- * |        |      |      |Dvorak|      |      |                              | TOG  | SAI  | HUI  | VAI  | MOD  |        |
- * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
- * |        |      |      |Colmak|      |      |      |      |  |      |      |      | SAD  | HUD  | VAD  | RMOD |        |
- * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        |      |      |      |      |      |  |      |      |      |      |      |
- *                        `----------------------------------'  `----------------------------------'
- */
-    [_ADJUST] = LAYOUT(
-      _______, _______, _______, QWERTY , _______, _______,                                    _______, _______, _______, _______,  _______, _______,
-      _______, _______, _______, DVORAK , _______, _______,                                    RGB_TOG, RGB_SAI, RGB_HUI, RGB_VAI,  RGB_MOD, _______,
-      _______, _______, _______, COLEMAK, _______, _______,_______, _______, _______, _______, _______, RGB_SAD, RGB_HUD, RGB_VAD, RGB_RMOD, _______,
-                                 _______, _______, _______,_______, _______, _______, _______, _______, _______, _______
-    ),
+ /*
+  * Adjust Layer: Default layer settings, RGB
+  *                                                                                     
+  * ┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
+  * |  --    | QWERTY |  Hue + |  Sat + |Bright +| Mode + |                                           | Static | Breath |Rainbow |  Swirl | Snake  |        |
+  * ├────────┼────────┼────────┼────────┼────────┼────────┤                                           ├────────┼────────┼────────┼────────┼────────┼────────┤
+  * |        | DVORAK |  Hue - |  Sat - |Bright -| Mode - |                                           |Kni Rid |Christm |St grad |RGB test|Twinkle |        | 
+  * ├────────┼────────┼────────┼────────┼────────┼────────┼────────┬────────┐       ┌────────┬────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+  * |        | COLEMAK|        |        |        | Toggle |        | Reset  |       | Reset  |        |        |        |        |        |        |        |
+  * └────────┴────────┴────────┼────────┼────────┼────────┼────────┼────────┤       ├────────┼────────┼────────┼────────┼────────┼────────┴────────┴────────┘
+  *                            |        |        |        |        |        |       |        |        |        |        |  --    |                           
+  *                            |        |        |        |        |        |       |        |        |        |        |        |
+  *                            └────────┴────────┴────────┴────────┴────────┘       └────────┴────────┴────────┴────────┴────────┘
+  */  
+  [_ADJUST] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
+     _______ ,QWERTY  ,RGB_HUI ,RGB_SAI ,RGB_VAI ,RGB_MOD ,                                            RGB_M_P ,RGB_M_B ,RGB_M_R ,RGB_M_SW,RGB_M_SN,XXXXXXX ,
+  //├────────┼────────┼────────┼────────┼────────┼────────┤                                           ├────────┼────────┼────────┼────────┼────────┼────────┤
+     XXXXXXX ,DVORAK  ,RGB_HUD ,RGB_SAD ,RGB_VAD ,RGB_RMOD,                                            RGB_M_K ,RGB_M_X ,RGB_M_G ,RGB_M_T ,RGB_M_TW,XXXXXXX , 
+  //├────────┼────────┼────────┼────────┼────────┼────────┼────────┬────────┐       ┌────────┬────────┼────────┼────────┼────────┼────────┼────────┼────────┤
+     XXXXXXX ,COLEMAK ,XXXXXXX ,XXXXXXX ,XXXXXXX ,RGB_TOG ,XXXXXXX ,QK_BOOT ,        QK_BOOT ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
+  //└────────┴────────┴────────┼────────┼────────┼────────┼────────┼────────┤       ├────────┼────────┼────────┼────────┼────────┼────────┴────────┴────────┘
+                                XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,        XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,_______                            
+  //                           |        |        |        |        |        |       |        |        |        |        |        |
+  //                           └────────┴────────┴────────┴────────┴────────┘       └────────┴────────┴────────┴────────┴────────┘
+  ),
 
 //  /*
 //   * Layer template
