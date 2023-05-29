@@ -162,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,RGB_HUI ,RGB_SAI ,RGB_VAI ,RGB_MOD ,XXXXXXX ,XXXXXXX ,                          XXXXXXX ,RGB_M_P ,RGB_M_B ,RGB_M_R ,RGB_M_SW,RGB_M_SN,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,RGB_HUD ,RGB_SAD ,RGB_VAD ,RGB_RMOD,XXXXXXX ,XXXXXXX ,                          XXXXXXX ,RGB_M_K ,RGB_M_X ,RGB_M_G ,RGB_M_T ,RGB_M_TW ,XXXXXXX ,
+     XXXXXXX ,RGB_HUD ,RGB_SAD ,RGB_VAD ,RGB_RMOD,XXXXXXX ,XXXXXXX ,                          XXXXXXX ,RGB_M_K ,RGB_M_X ,RGB_M_G ,RGB_M_T ,RGB_M_TW,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,RGB_TOG ,XXXXXXX ,XXXXXXX ,XXXXXXX ,        XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
