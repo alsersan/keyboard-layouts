@@ -58,7 +58,7 @@ enum layers {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  /*
-  * Base Layer: QWERTY
+  * Base layer: QWERTY
   *                                                                                     
   * ┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
   * |ADJ/Tab |   Q    |   W    |   E    |   R    |   T    |                                           |   Y    |   U    |   I    |   O    |   P    | CapsLk |
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   /*
-  * Base Layer: DVORAK
+  * Base layer: DVORAK
   *                                                                                     
   * ┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
   * |ADJ/Tab |   ' "  |   , <  |   . >  |   P    |   Y    |                                           |   F    |   G    |   C    |   R    |   L    | CapsLk |
@@ -112,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
  /*
-  * Base Layer: Colemak DH
+  * Base layer: Colemak DH
   *                                                                                     
   * ┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
   * |ADJ/Tab |   Q    |   W    |   F    |   P    |   B    |                                           |   J    |   L    |   U    |   Y    |  ; :   | CapsLk |
@@ -166,7 +166,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
  /*
-  * Nav layout: mouse navigation and other controls
+  * Nav layer: mouse navigation and other controls
   *                                                                                     
   * ┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
   * |   --   |        |Mouse ↑ |        |MouseW ↑|        |                                           |  Home  |Bright -|Bright +| PrtSc  |        |        |
