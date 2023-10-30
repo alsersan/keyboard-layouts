@@ -37,10 +37,7 @@ enum layers {
 #define ALT_L RALT_T(KC_L)
 #define GUI_SCLN RGUI_T(KC_SCLN)
 
-#define GUI_GRV LGUI_T(KC_GRV)
-#define ALT_DLR LALT_T(KC_DLR)
-#define CTL_LCBR LCTL_T(KC_LCBR)
-#define SFT_RCBR LSFT_T(KC_RCBR)
+#define ALT_GRV LALT_T(KC_GRV)
 
 // Combos
 uint16_t COMBO_LEN = 2;
@@ -104,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┐        ┌────────┬────────┬────────┬────────┬────────┐
      KC_EXLM ,KC_QUES ,KC_LPRN ,KC_RPRN ,KC_UNDS ,         KC_HASH ,KC_EQL  ,KC_LT   ,KC_GT   ,KC_PLUS ,
   //├────────┼────────┼────────┼────────┼────────┤        ├────────┼────────┼────────┼────────┼────────┤
-     GUI_GRV ,ALT_DLR ,CTL_LCBR,SFT_RCBR,KC_PIPE ,         KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT ,KC_MINS , 
+     ALT_GRV ,KC_DLR  ,KC_LCBR ,KC_RCBR ,KC_PIPE ,         KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RGHT ,KC_MINS , 
   //├────────┼────────┼────────┼────────┼────────┤        ├────────┼────────├────────┼────────┼────────┤
      KC_TILD ,KC_PERC ,KC_LBRC ,KC_RBRC ,KC_AMPR ,         KC_ASTR ,KC_COLN ,KC_CIRC ,KC_BSLS ,KC_AT   ,
   //└────────┴────────┴────────┼────────┼────────┤        ├────────┼────────├────────┴────────┴────────┘
