@@ -98,6 +98,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
+/*
+ * CAS5_SEC is a layer-tap key, but LT() can only send unmodified keys, so a
+ * tap would send a plain 5. Intercept the tap and send Ctrl+Alt+Shift+5
+ * instead; a hold falls through to QMK and activates the secondary layer.
+ */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case CAS5_SEC:
