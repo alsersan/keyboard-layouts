@@ -16,15 +16,39 @@
 #include QMK_KEYBOARD_H
 
 enum layers {
-    _HYPER = 0,
+    _MAIN = 0,
+    _SECONDARY,
 };
 
 // Sends Ctrl+Alt+Shift+kc
 #define CAS(kc) LCTL(LALT(LSFT(kc)))
 
+// Tap: Ctrl+Alt+Shift+5, Hold: secondary layer
+#define CAS5_SEC LT(_SECONDARY, KC_5)
+
+/*
+ * Shortcut numbering: every key sends CAS(kc). Each key position has a fixed
+ * code, reserved even when the key is unused (XXXXXXX). Codes go in the order
+ * F1-F12, 1-9, 0, then A-Z, by position: columns left to right, top to bottom
+ * within each column, thumb keys last. _SECONDARY continues after _MAIN.
+ *
+ * _MAIN left half:
+ *   F1  F4  F7  F10  1
+ *   F2  F5  F8  F11  2
+ *   F3  F6  F9  F12  3
+ *               4    5   (5 is also the layer key on hold)
+ *
+ * _SECONDARY left half:
+ *   6  9  B  E  H
+ *   7  0  C  F  I
+ *   8  A  D  G  J
+ *            K  L   (L reserved: that position is the layer key)
+ */
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  /*
-  * Hyper layer: C-Cancel, S-Sell, F-Flat, B-Buy
+  * Main layer: C-Cancel, S-Sell, F-Flat, B-Buy
+  * Size 20*: tap for Size 20, hold for secondary layer
   *
   * ┌────────┬────────┬────────┬────────┬────────┐        ┌────────┬────────┬────────┬────────┬────────┐
   * | C Last |S B-5 25%| F B-2 | B B+2  | Size 1 |        |   -    |   -    |   -    |   -    |   -    |
@@ -33,10 +57,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   * ├────────┼────────┼────────┼────────┼────────┤        ├────────┼────────┼────────┼────────┼────────┤
   * | C All  |S B-5 50%| F B-10| B B+10 | Size 10|        |   -    |   -    |   -    |   -    |   -    |
   * └────────┴────────┴────────┼────────┼────────┤        ├────────┼────────┼────────┴────────┴────────┘
-  *                            | Size 15| Size 20|        |   -    |   -    |
+  *                            | Size 15|Size 20*|        |   -    |   -    |
   *                            └────────┴────────┘        └────────┴────────┘
   */
-  [_HYPER] = LAYOUT(
+  [_MAIN] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┐        ┌────────┬────────┬────────┬────────┬────────┐
      CAS(KC_F1),CAS(KC_F4),CAS(KC_F7),CAS(KC_F10),CAS(KC_1), XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //├────────┼────────┼────────┼────────┼────────┤        ├────────┼────────┼────────┼────────┼────────┤
@@ -44,7 +68,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┤        ├────────┼────────┼────────┼────────┼────────┤
      CAS(KC_F3),CAS(KC_F6),CAS(KC_F9),CAS(KC_F12),CAS(KC_3), XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //└────────┴────────┴────────┼────────┼────────┤        ├────────┼────────┼────────┴────────┴────────┘
-                                CAS(KC_4),CAS(KC_5),        XXXXXXX, XXXXXXX
+                                CAS(KC_4),CAS5_SEC,         XXXXXXX, XXXXXXX
+  //                           └────────┴────────┘        └────────┴────────┘
+  ),
+
+ /*
+  * Secondary layer: F-Flat, B-Buy, P-Price input, MKT-Market, T-Test
+  *
+  * ┌────────┬────────┬────────┬────────┬────────┐        ┌────────┬────────┬────────┬────────┬────────┐
+  * |   -    |   -    | F MKT  | B MKT  |P + 0.01|        |   -    |   -    |   -    |   -    |   -    |
+  * ├────────┼────────┼────────┼────────┼────────┤        ├────────┼────────┼────────┼────────┼────────┤
+  * | Test B |   -    | F Fixed| B Fixed|P = Ask |        |   -    |   -    |   -    |   -    |   -    |
+  * ├────────┼────────┼────────┼────────┼────────┤        ├────────┼────────┼────────┼────────┼────────┤
+  * |T +0.01 |T -0.01 |   -    |   -    |P - 0.01|        |   -    |   -    |   -    |   -    |   -    |
+  * └────────┴────────┴────────┼────────┼────────┤        ├────────┼────────┼────────┴────────┴────────┘
+  *                            |   -    |   ▼    |        |   -    |   -    |
+  *                            └────────┴────────┘        └────────┴────────┘
+  */
+  [_SECONDARY] = LAYOUT(
+  //┌────────┬────────┬────────┬────────┬────────┐        ┌────────┬────────┬────────┬────────┬────────┐
+     XXXXXXX, XXXXXXX, CAS(KC_B),CAS(KC_E),CAS(KC_H),      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┤        ├────────┼────────┼────────┼────────┼────────┤
+     CAS(KC_7),XXXXXXX,CAS(KC_C),CAS(KC_F),CAS(KC_I),      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //├────────┼────────┼────────┼────────┼────────┤        ├────────┼────────┼────────┼────────┼────────┤
+     CAS(KC_8),CAS(KC_A),XXXXXXX, XXXXXXX, CAS(KC_J),      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //└────────┴────────┴────────┼────────┼────────┤        ├────────┼────────┼────────┴────────┴────────┘
+                                XXXXXXX, _______,          XXXXXXX, XXXXXXX
   //                           └────────┴────────┘        └────────┴────────┘
   ),
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case CAS5_SEC:
+            // LT only supports basic keycodes, so send the modded tap manually
+            if (record->tap.count && record->event.pressed) {
+                tap_code16(CAS(KC_5));
+                return false;
+            }
+            break;
+    }
+    return true;
+}
